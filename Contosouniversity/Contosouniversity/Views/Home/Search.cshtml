@@ -1,0 +1,120 @@
+﻿@model Tuple<List<Contosouniversity.Entity.Course>, List<Contosouniversity.Entity.Student>>
+@{
+    ViewData["Title"] = "Emre";
+}
+
+<h1>Emre</h1>
+
+<table>
+
+    <tbody>
+        <tr>
+            <td>
+                
+            </td>
+            <td>
+                <form asp-action="Search" method="get">
+                    <select name="table" id="table">
+                        <option value="0">Seçim Yapınız</option>
+                        <option value="1">Öğrenciler</option>
+                        <option value="2">Kurslar</option>
+                    </select>
+                    <p>
+                        Title: <input type="text" name="search" >
+                        <input type="submit" value="Filter" />
+                    </p>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@if (Model?.Item1.Count > 0)
+{
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Credits
+                </th>
+                <th>
+                    Department
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item1 in Model.Item1)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.CourseId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Credits)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Department.Name)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div>No Course</div>
+}
+
+
+@if (Model?.Item2.Count > 0)
+{
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Enrollment Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item2 in Model.Item2)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item2.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item2.FirstMidName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item2.EnrollmentDate)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <div>No Student</div>
+}

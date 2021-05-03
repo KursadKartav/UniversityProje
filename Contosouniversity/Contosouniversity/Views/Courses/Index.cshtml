@@ -1,0 +1,82 @@
+﻿@model Contosouniversity.Models.SchoolViewModels.CourseIndexViewModel
+
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<h1>Courses</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                CourseId
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Credits
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Student Counts
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Courses)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Credits)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.Name)
+                </td>
+                <td>
+                    <a asp-action="Index" asp-route-courseId="@item.CourseId"> @Html.DisplayFor(modelItem => item.StudentsCount)</a>
+
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CourseId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.Students != null && Model.Students.Count()>0)
+{
+    <h3>
+        Students Enrolled in Selected Course
+    </h3>
+    <table class="table">
+        <tr>
+            <th>Student</th>
+        </tr>
+        @foreach (var item in Model.Students)
+        {
+            <tr>
+                <td>
+                    @item.FirstMidName @item.LastName
+                </td>
+            </tr>
+        }
+    </table>
+}

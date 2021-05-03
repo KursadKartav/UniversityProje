@@ -1,0 +1,60 @@
+﻿@model Contosouniversity.Entity.Course
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Credits)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Credits)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Department.DepartmentID)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <p>
+        Student Count :  @Model.Enrollments.Count
+    </p>
+</div>
+
+
+<div>
+    @if (Model.Enrollments.Count > 0)
+    {
+        <h3>
+            Students
+        </h3>
+        @foreach (var item in Model.Enrollments)
+        {
+            <div>
+                @item.Student.FirstMidName @item.Student.LastName
+            </div>
+            <br />
+        }
+    }
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CourseId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

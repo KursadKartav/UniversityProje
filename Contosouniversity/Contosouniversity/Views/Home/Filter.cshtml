@@ -1,0 +1,102 @@
+﻿@model Tuple<List<Contosouniversity.Entity.Course>, List<Contosouniversity.Entity.Student>>
+@{
+    ViewData["Title"] = "Filter";
+}
+
+<h1>Filter</h1>
+
+
+
+<form action="Filter" method="get">
+    <p>
+        <input type="text" name="filtrele" />
+        <input type="submit" name="bul" />
+    </p>
+    <select id="sec" name="sec">
+        <option value="0">Seçim yapınız</option>
+        <option value="1">Kurslar</option>
+        <option value="2">Öğrenciler</option>
+    </select>
+    <select id="searchType" name="searchType">
+        <option value="0">Equals</option>
+        <option value="1">Start With</option>
+        <option value="2">End With</option>
+    </select>
+</form>
+
+@if (Model?.Item1.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Course Id
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Credits
+                </th>
+                <th>
+                    Department
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item1 in Model.Item1)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.CourseId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Credits)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Department.Name)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (Model?.Item2.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Enrollment Data
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item2 in Model.Item2)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item2.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item2.FirstMidName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item2.EnrollmentDate)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
